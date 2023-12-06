@@ -1,0 +1,58 @@
+int menu = 0;
+int currentIntermediate = 0; // Variable to keep track of the current intermediate screen
+
+// 0 start menu
+// 1 intermediate screen
+// 2 game play
+// 3 end game
+
+void setup() {
+  size(900, 780);
+}
+
+void draw() {
+  switch(menu) {
+    case 0: // start menu
+      PImage imgStart;
+      imgStart = loadImage("_Froggy Game! Starting Screen.png"); 
+      image(imgStart, 0, 0);
+      break;
+    case 1: // intermediate screen
+      PImage imgIntermediate;
+      // Use different intermediate images based on the currentIntermediate variable
+      if (currentIntermediate == 0) {
+        imgIntermediate = loadImage("Froggy Game! Background.png");
+      } else {
+        imgIntermediate = loadImage("Froggy Game! Ending Screen.png");
+      }
+      image(imgIntermediate, 0, 0);
+      break;
+    case 2: // game play
+      // Add code for game play here
+      break;
+    case 3: // end game
+      PImage imgEnd;
+      imgEnd = loadImage("Froggy Game! Ending Screen.png");
+      image(imgEnd, 0, 0);
+      break;
+  }
+}
+
+void mousePressed() {
+  // Switch screens based on mouse click
+  if (menu == 0) {
+    menu = 1; // Switch to intermediate screen
+  } else if (menu == 1) {
+    // Switch to game play or the next intermediate screen
+    if (currentIntermediate == 0) {
+      currentIntermediate = 1; // Switch to the next intermediate screen
+    } else {
+      menu = 2; // Switch to game play
+      currentIntermediate = 0; // Reset intermediate screen variable
+    }
+  } else if (menu == 2) {
+    menu = 3; // Switch to end game
+  } else if (menu == 3) {
+    menu = 0; // Switch back to start menu
+  }
+}
