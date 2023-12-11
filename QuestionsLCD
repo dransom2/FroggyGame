@@ -1,0 +1,66 @@
+// include the library code:
+#include <LiquidCrystal.h>
+
+// initialize the library by associating any needed LCD interface pin
+// with the arduino pin number it is connected to
+const int rs = 12, en = 11, d4 = 7, d5 = 8, d6 = 9, d7 = 10;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+const int buttonPin = 5; //button is connected to 5
+int buttonState = 0; // button state
+
+int currentQuestion = 0;
+
+//Questions
+int questions[][3] = {
+  {4, 7, 0}, 
+  {1, 9, 0}, 
+  {5, 8, 0},
+  {4, 3, 0},
+  {6, 3, 0},
+};
+
+void setup() {
+  Serial.begin(9600);
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("Welcome to the");
+  lcd.setCursor(0, 1);
+  lcd.print("Froggy Game!");
+
+  pinMode(buttonPin, INPUT); //set the button as a input
+
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  if(buttonState == HIGH){ //the button is pressed
+    if(currentQuestion < 5){ 
+      displayQuestion(currentQuestion);
+      currentQuestion++;
+    } else { //when all questions are done
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Good Job!");
+      delay(2000);
+      lcd.clear();
+      lcd.print("Welcome to the");
+      lcd.setCursor(0, 1);
+      lcd.print("Froggy Game!");
+    }
+    delay(1000); //wait before going to next button press
+  }
+}
+
+void displayQuestion(int index){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Question:");
+  lcd.setCursor(0, 1);
+  lcd.print(questions[index][0]);
+  lcd.print((questions[index][2] == 0) ? " + ");
+  lcd.print(questions[index][1]);
+  lcd.print(" = ? ");
+}
