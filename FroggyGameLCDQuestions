@@ -1,0 +1,16 @@
+//main Froggy Game LCD Questions
+
+#include "FroggyGame.h"
+
+FroggyGame froggyGame;
+
+const int buttonPin = 5; 
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  froggyGame.initialize();
+}
+void loop() {
+  froggyGame.handleButtonPress();
+  delay(100);
+}
