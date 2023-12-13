@@ -1,3 +1,4 @@
+import ddf.minim.*;
 int menu = 0;
 int currentIntermediate = 0;// Variable to keep track of the current intermediate screen
 int gameState = 0; 
@@ -22,6 +23,9 @@ boolean questionAnswered = false;
 // QuestionManager instance
 QuestionManager qManager;
 
+Minim minim; 
+AudioPlayer music; 
+
 void setup() {
   size(900, 780);
   
@@ -35,6 +39,10 @@ void setup() {
 
   // Initialize QuestionManager and display question
   qManager = new QuestionManager();
+  
+  minim = new Minim(this);
+  music = minim.loadFile("PondSoundEffect.mp3");
+  music.play();
 }
 
 void draw() {
@@ -61,6 +69,7 @@ void draw() {
     break;
     
   case 3: // end game
+    music.pause();
     image(imgEnd, 0, 0);
     gameState = 0; 
     break;
