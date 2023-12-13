@@ -4,7 +4,7 @@ class QuestionManager{
   int cQuestionindex; //index of current question
   int playAnswer = -1; //plater's current answer
   boolean isCorrect; //will track if answer is correct by flagging
-  boolean notCorrect; 
+  boolean notCorrect; //will track if answer is incorrect by flagging
 
   QuestionManager(){
     //Initialize questions array with math questions
@@ -37,7 +37,7 @@ class QuestionManager{
     if(isCorrect){
       fill(0, 100, 0);
       text("Correct!", 340, height - 580);
-    } else if (notCorrect) {
+    } if (notCorrect) {
       fill(255, 0, 0);
      text("Incorrect! Try Again.", 250, height - 580);
     }
@@ -55,6 +55,7 @@ class QuestionManager{
   
   //compare the player's answer with the correct answer;
   isCorrect = (playAnswer == correctAnswer);
+  notCorrect = (playAnswer != correctAnswer); 
   }
 
   
