@@ -1,1 +1,13 @@
+Open Arduino IDE script and upload to Arduino microcomputer
+Close Arduino IDE
+Open Processing script
+Run Program
+Arduino should now be interacting with incorrect/correct answers when given
 
+Arduino contents include:
+LED+ = pin 13
+LED- = Ground
+LED2+ = pin 12
+LED2- = Ground
+Buzzer+ = pin 11
+Buzzer- = Ground
